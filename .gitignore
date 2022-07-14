@@ -23,3 +23,6 @@ src/lib
 *.njsproj
 *.sln
 *.sw?
+
+.env.local
+codegen.yml
