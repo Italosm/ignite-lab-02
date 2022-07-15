@@ -10,7 +10,13 @@ export function Sidebar() {
   const navigate = useNavigate();
 
   return (
-    <>
+    <aside
+      className={`
+      bg-gray-700 p-6 border-l border-gray-600
+        md:w-[348px] md:relative w-full h-screen
+        ${menuVisible ? "absolute right-0 left-0" : ""}
+      `}
+    >
       <button
         onClick={() => {
           setMenuVisible(!menuVisible);
@@ -19,56 +25,48 @@ export function Sidebar() {
       >
         {menuVisible ? <X size={32} /> : <List size={32} />}
       </button>
-      <aside
-        className={`
-      bg-gray-700 p-6 border-l border-gray-600
-        md:w-[348px] md:relative w-full h-screen
-        ${menuVisible ? "absolute right-0 left-0" : ""}
-      `}
-      >
-        {menuVisible ? (
-          <>
-            <span className="text-bold text-2xl pb-6 mb-6 border-b border-gray-500 md:block flex justify-center">
-              Cronograma das aulas
-            </span>
-            <div
-              onClick={() => setMenuVisible(!menuVisible)}
-              className="flex flex-col gap-8"
-            >
-              {data?.lessons.map((lesson) => {
-                return (
-                  <Lesson
-                    key={lesson.id}
-                    title={lesson.title}
-                    slug={lesson.slug}
-                    availableAt={new Date(lesson.availableAt)}
-                    type={lesson.lessonType}
-                  />
-                );
-              })}
-            </div>
-          </>
-        ) : (
-          <>
-            <span className="md:text-bold md:text-2xl md:pb-6 md:mb-6 md:border-b md:border-gray-500 md:block hidden">
-              Cronograma das aulas
-            </span>
-            <div className="md:flex md:flex-col md:gap-8 hidden">
-              {data?.lessons.map((lesson) => {
-                return (
-                  <Lesson
-                    key={lesson.id}
-                    title={lesson.title}
-                    slug={lesson.slug}
-                    availableAt={new Date(lesson.availableAt)}
-                    type={lesson.lessonType}
-                  />
-                );
-              })}
-            </div>
-          </>
-        )}
-      </aside>
-    </>
+      {menuVisible ? (
+        <>
+          <span className="text-bold text-2xl pb-6 mb-6 border-b border-gray-500 md:block flex justify-center">
+            Cronograma das aulas
+          </span>
+          <div
+            onClick={() => setMenuVisible(!menuVisible)}
+            className="flex flex-col gap-8"
+          >
+            {data?.lessons.map((lesson) => {
+              return (
+                <Lesson
+                  key={lesson.id}
+                  title={lesson.title}
+                  slug={lesson.slug}
+                  availableAt={new Date(lesson.availableAt)}
+                  type={lesson.lessonType}
+                />
+              );
+            })}
+          </div>
+        </>
+      ) : (
+        <>
+          <span className="md:text-bold md:text-2xl md:pb-6 md:mb-6 md:border-b md:border-gray-500 md:block hidden">
+            Cronograma das aulas
+          </span>
+          <div className="md:flex md:flex-col md:gap-8 hidden">
+            {data?.lessons.map((lesson) => {
+              return (
+                <Lesson
+                  key={lesson.id}
+                  title={lesson.title}
+                  slug={lesson.slug}
+                  availableAt={new Date(lesson.availableAt)}
+                  type={lesson.lessonType}
+                />
+              );
+            })}
+          </div>
+        </>
+      )}
+    </aside>
   );
 }
