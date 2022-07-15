@@ -8,7 +8,7 @@ export function Event() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex flex-1 justify-end">
+      <main className="flex flex-1 flex-end">
         {slug ? <Video lessonSlug={slug} /> : <div className="flex-1"></div>}
         <Sidebar />
       </main>

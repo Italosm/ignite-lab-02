@@ -6,11 +6,11 @@ import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <ApolloProvider client={client}>
         <Router />
-      </BrowserRouter>
-    </ApolloProvider>
+      </ApolloProvider>
+    </BrowserRouter>
   );
 }
 

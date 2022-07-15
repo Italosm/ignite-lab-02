@@ -2,7 +2,10 @@ import { gql, useMutation } from "@apollo/client";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LogoIcon } from "../components/Logo";
-import { useCreateSubscriberMutation } from "../graphql/generated";
+import {
+  useCreateSubscriberMutation,
+  usePublishSubscriberMutation,
+} from "../graphql/generated";
 
 export function Subscribe() {
   const navigate = useNavigate();
@@ -10,8 +13,9 @@ export function Subscribe() {
   const [email, setEmail] = useState("");
 
   const [createSubscriber, { loading }] = useCreateSubscriberMutation();
+  const [publishSubscriber] = usePublishSubscriberMutation();
 
-  async function handleSubscruiber(event: FormEvent) {
+  async function handleSubscriber(event: FormEvent) {
     event.preventDefault();
 
     await createSubscriber({
@@ -20,6 +24,13 @@ export function Subscribe() {
         email,
       },
     });
+
+    await publishSubscriber({
+      variables: {
+        email,
+      },
+    });
+
     navigate("/event");
   }
 
@@ -44,7 +55,7 @@ export function Subscribe() {
             Inscreva-se gratuitamente
           </strong>
           <form
-            onSubmit={handleSubscruiber}
+            onSubmit={handleSubscriber}
             className="flex flex-col gap-2 w-full"
           >
             <input
@@ -66,6 +77,7 @@ export function Subscribe() {
             >
               Garantir minha vaga
             </button>
+            <button>Faça já seu login</button>
           </form>
         </div>
       </div>
