@@ -1,11 +1,13 @@
 import { List, X } from "phosphor-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useGetLessonsQuery } from "../graphql/generated";
 import { Lesson } from "./Lesson";
 
 export function Sidebar() {
   const { data } = useGetLessonsQuery();
   const [menuVisible, setMenuVisible] = useState(true);
+  const navigate = useNavigate();
 
   return (
     <aside
@@ -18,7 +20,10 @@ export function Sidebar() {
       `}
     >
       <button
-        onClick={() => setMenuVisible(!menuVisible)}
+        onClick={() => {
+          setMenuVisible(!menuVisible);
+          navigate("/event");
+        }}
         className="fixed top-5 right-4 text-white md:hidden md:opacity-0 ease-in-out duration-300"
       >
         {menuVisible ? <X size={32} /> : <List size={32} />}
