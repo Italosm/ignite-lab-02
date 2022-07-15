@@ -1,20 +1,18 @@
 import { List, X } from "phosphor-react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useGetLessonsQuery } from "../graphql/generated";
 import { Lesson } from "./Lesson";
 
 export function Sidebar() {
   const { data } = useGetLessonsQuery();
   const [menuVisible, setMenuVisible] = useState(true);
-  const navigate = useNavigate();
 
   return (
     <aside
       className={`
       bg-gray-700 p-6 border-l border-gray-600
-        md:w-[348px] md:relative w-full h-screen
-        ${menuVisible ? "absolute right-0 left-0" : ""}
+        md:w-[348px] md:relative
+        ${menuVisible ? "absolute right-0 left-0 w-screen h-screen " : ""}
       `}
     >
       <button
