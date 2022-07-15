@@ -69,7 +69,10 @@ export function Subscribe() {
           </form>
         </div>
       </div>
-      <img src="/src/assets/code-mockup.png" alt="" />
+      <img
+        src="https://res.cloudinary.com/drgpo0mge/image/upload/v1657859075/Group_7735_aeua26.png"
+        alt=""
+      />
     </div>
   );
 }
