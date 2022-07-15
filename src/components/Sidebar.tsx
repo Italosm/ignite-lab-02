@@ -11,11 +11,11 @@ export function Sidebar() {
     <aside
       onClick={() => setMenuVisible(!menuVisible)}
       className="
-      md:w-[348px]
+      md:w-[348px] md:relative absolute
       bg-gray-700 p-6 border-l border-gray-600
       "
     >
-      <button className="fixed mr-2 top-5 right-8 text-white md:hidden md:opacity-0 ease-in-out duration-300">
+      <button className="fixed top-5 right-4 text-white md:hidden md:opacity-0 ease-in-out duration-300">
         {menuVisible ? <X size={32} /> : <List size={32} />}
       </button>
       {menuVisible ? (
