@@ -13,7 +13,7 @@ export function Sidebar() {
       className={`
       bg-gray-700 p-6 border-l border-gray-600
         md:w-[348px] md:relative
-        ${menuVisible ? "absolute h-full w-full" : ""}
+        ${menuVisible ? "absolute h-full w-full right-0" : ""}
 
 
       `}
