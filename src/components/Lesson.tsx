@@ -36,7 +36,7 @@ export function Lesson(props: LessonProps) {
         className={`rounded border border-gray-500 p-4 mt-2  ${
           isActiveLesson
             ? "bg-green-500 group-hover:border-white"
-            : "group-hover:border-green-500"
+            : "group-hover:border-green-500 bg-gray-700"
         }`}
       >
         <header className="flex items-center justify-between">
