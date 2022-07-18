@@ -13,15 +13,15 @@ export function Sidebar() {
         onClick={() => {
           setMenuVisible(!menuVisible);
         }}
-        className="absolute top-5 right-5 text-white md:hidden md:opacity-0 ease-in-out duration-300"
+        className="absolute top-5 right-5 text-blue-500 md:hidden md:opacity-0 ease-in-out duration-300"
       >
         {!menuVisible ? <List size={32} /> : <X size={32} />}
       </button>
       <aside
         className={`
-      bg-gray-700 md:p-6 md:border-l border-gray-600
+      bg-gray-700 md:p-4 md:border-l border-gray-600
         md:w-[348px] md:relative
-        ${menuVisible ? "absolute w-screen min-h-screen p-8 z-1" : ""}
+        ${menuVisible ? "absolute p-8 w-screen min-h-screen z-1" : ""}
       `}
       >
         {menuVisible ? (

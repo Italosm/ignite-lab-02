@@ -11,6 +11,7 @@ export function Subscribe() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const [createSubscriber, { loading }] = useCreateSubscriberMutation();
   const [publishSubscriber] = usePublishSubscriberMutation();
@@ -36,9 +37,11 @@ export function Subscribe() {
 
   return (
     <div className="min-h-screen bg-blur bg-cover bg-no-repeat flex flex-col items-center">
-      <div className="w-full max-w-[1100px] flex items-center justify-between mt-20 mx-auto">
-        <div className="max-w-[640px]">
-          <LogoIcon />
+      <div className="w-full max-w-[1100px] px-16 md:px-8 md:flex items-center justify-between mt-20 mx-auto">
+        <div className="max-w-[640px] ">
+          <div className="md:block flex justify-center">
+            <LogoIcon />
+          </div>
           <h1 className="mt-8 text-[2.5rem] leading-tight">
             Construa uma{" "}
             <strong className="text-blue-500">aplicação completa</strong>, do
@@ -50,7 +53,7 @@ export function Subscribe() {
             oportunidades do mercado.
           </p>
         </div>
-        <div className="p-8 bg-gray-700 border border-gray-500 rounded">
+        <div className="p-8 mt-8 md:mt-0 bg-gray-700 border border-gray-500 rounded">
           <strong className="text-2xl mb-6 block">
             Inscreva-se gratuitamente
           </strong>
@@ -70,10 +73,22 @@ export function Subscribe() {
               type="text"
               placeholder="Digite seu e-mail"
             />
+            <input
+              onChange={(event) => setPassword(event.target.value)}
+              className="bg-gray-900 rounded px-5 h-14"
+              type="password"
+              placeholder="Digite sua senha"
+            />
+            <input
+              onChange={(event) => setPassword(event.target.value)}
+              className="bg-gray-900 rounded px-5 h-14"
+              type="password"
+              placeholder="Confirme sua senha"
+            />
             <button
               type="submit"
               disabled={loading}
-              className="mt-4 bg-green-500 uppercase py-4 rounded font-bold text-sm hover:bg-green-700 transition-colors disabled:opacity-50"
+              className="mt-4 mb-4 bg-green-500 uppercase py-4 rounded font-bold text-sm hover:bg-green-700 transition-colors disabled:opacity-50"
             >
               Garantir minha vaga
             </button>
