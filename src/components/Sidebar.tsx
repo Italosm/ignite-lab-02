@@ -19,19 +19,11 @@ export function Sidebar() {
       </button>
       <aside
         className={`
-      bg-gray-700 p-6 border-l border-gray-600
+      bg-gray-700 md:p-6 md:border-l border-gray-600
         md:w-[348px] md:relative
-        ${menuVisible ? "absolute right-0 left-0 w-screen h-screen " : ""}
+        ${menuVisible ? "absolute w-screen min-h-screen p-8 z-1" : ""}
       `}
       >
-        {/* <button
-          onClick={() => {
-            setMenuVisible(!menuVisible);
-          }}
-          className="absolute top-5 right-5 text-white md:hidden md:opacity-0 ease-in-out duration-300"
-        >
-          {menuVisible ? <X size={32} /> : null}
-        </button> */}
         {menuVisible ? (
           <>
             <span className="text-bold text-2xl pb-6 mb-6 border-b border-gray-500 md:block flex justify-center">
@@ -39,7 +31,7 @@ export function Sidebar() {
             </span>
             <div
               onClick={() => setMenuVisible(!menuVisible)}
-              className="flex flex-col gap-8"
+              className="flex flex-col gap-8 "
             >
               {data?.lessons.map((lesson) => {
                 return (
