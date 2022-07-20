@@ -39,15 +39,15 @@ export function Subscribe() {
     <div className="min-h-screen bg-blur bg-cover bg-no-repeat flex flex-col items-center">
       <div className="w-full max-w-[1100px]  md:px-8 md:flex items-center justify-between mt-8 mx-auto">
         <div className="max-w-[640px] ">
-          <div className="md:block flex justify-center">
+          <div className=" md:block flex justify-center">
             <LogoIcon />
           </div>
-          <h1 className="p-4 mt-2 text-[2.5rem] leading-tight">
+          <h1 className="p-4 mt-2 md:p-0 text-3xl md:text-[2.5rem] leading-tight">
             Construa uma{" "}
             <strong className="text-blue-500">aplicação completa</strong>, do
             zero, com <strong className="text-blue-500">React</strong>.
           </h1>
-          <p className="px-4 text-gray-200 leading-relaxed">
+          <p className="px-4 md:p-0 md:mt-4 text-gray-200 leading-relaxed">
             Em apenas uma semana você vai dominar na prática uma das tecnologias
             mais utilizadas e com alta demanda para acessar as melhores
             oportunidades do mercado.
