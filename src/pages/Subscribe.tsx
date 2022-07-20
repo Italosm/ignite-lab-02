@@ -97,7 +97,7 @@ export function Subscribe() {
                 Garantir minha vaga
               </button>
               <button
-                className="hover:border hover:border-green-700 p-2"
+                className=" border rounded border-transparent hover:border hover:border-white hover:bg-green-700 p-2"
                 onClick={() => {
                   setIsLogin(!isLogin);
                 }}
@@ -136,7 +136,7 @@ export function Subscribe() {
                 Acessar Plataforma
               </button>
               <button
-                className="hover:border hover:border-green-700 p-2"
+                className=" border border-transparent rounded hover:border-white hover:bg-green-700 p-2"
                 onClick={() => {
                   setIsLogin(!isLogin);
                 }}
@@ -145,7 +145,7 @@ export function Subscribe() {
               </button>
               <a
                 href="#"
-                className="text-center hover:border hover:border-green-700 p-2"
+                className="text-center border border-transparent rounded hover:border-white p-2 hover:bg-green-700"
               >
                 Esqueceu a senha?
               </a>
