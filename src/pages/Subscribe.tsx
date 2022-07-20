@@ -39,7 +39,7 @@ export function Subscribe() {
     <div className="min-h-screen bg-blur bg-cover bg-no-repeat flex flex-col items-center">
       <div className="w-full max-w-[1100px]  md:px-8 md:flex items-center justify-between mt-8 mx-auto">
         <div className="max-w-[640px] ">
-          <div className=" md:block flex justify-center">
+          <div className="flex mb-4 justify-center">
             <LogoIcon />
           </div>
           <h1 className="p-4 mt-2 md:p-0 text-3xl md:text-[2.5rem] leading-tight">
