@@ -56,7 +56,7 @@ export function Subscribe() {
           </p>
         </div>
         {isLogin ? (
-          <div className="w-[340px] text-center p-6 mt-8  md:mt-0 bg-gray-700 border border-gray-500 rounded">
+          <div className="w-full md:w-[360px] text-center p-6 mt-8  md:mt-0 bg-gray-700 border border-gray-500 rounded">
             <strong className="text-2xl mb-6 block">
               Inscreva-se gratuitamente
             </strong>
@@ -107,7 +107,7 @@ export function Subscribe() {
             </form>
           </div>
         ) : (
-          <div className="w-[340px] p-6 mt-8  md:mt-0 bg-gray-700 border border-gray-500 rounded">
+          <div className="w-full md:w-[360px] p-6 mt-8  md:mt-0 bg-gray-700 border border-gray-500 rounded">
             <strong className="text-2xl mb-6 block text-center">
               Acessar plataforma
             </strong>
