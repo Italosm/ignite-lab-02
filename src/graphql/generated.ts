@@ -4158,6 +4158,7 @@ export type Subscriber = Node & {
   /** The unique identifier */
   id: Scalars['ID'];
   name: Scalars['String'];
+  password: Scalars['String'];
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
@@ -4232,6 +4233,7 @@ export type SubscriberCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   name: Scalars['String'];
+  password: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -4341,6 +4343,25 @@ export type SubscriberManyWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  password_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  password_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  password_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  password_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  password_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  password_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  password_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  password_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  password_starts_with?: InputMaybe<Scalars['String']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -4387,6 +4408,8 @@ export enum SubscriberOrderByInput {
   IdDesc = 'id_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
+  PasswordAsc = 'password_ASC',
+  PasswordDesc = 'password_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
   UpdatedAtAsc = 'updatedAt_ASC',
@@ -4396,6 +4419,7 @@ export enum SubscriberOrderByInput {
 export type SubscriberUpdateInput = {
   email?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
 };
 
 export type SubscriberUpdateManyInlineInput = {
@@ -4417,6 +4441,7 @@ export type SubscriberUpdateManyInlineInput = {
 
 export type SubscriberUpdateManyInput = {
   name?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
 };
 
 export type SubscriberUpdateManyWithNestedWhereInput = {
@@ -4545,6 +4570,25 @@ export type SubscriberWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  password_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  password_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  password_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  password_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  password_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  password_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  password_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  password_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  password_starts_with?: InputMaybe<Scalars['String']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -5571,6 +5615,7 @@ export enum _SystemDateTimeFieldVariation {
 export type CreateSubscriberMutationVariables = Exact<{
   name: Scalars['String'];
   email: Scalars['String'];
+  password: Scalars['String'];
 }>;
 
 
@@ -5581,7 +5626,14 @@ export type PublishSubscriberMutationVariables = Exact<{
 }>;
 
 
-export type PublishSubscriberMutation = { __typename?: 'Mutation', publishSubscriber?: { __typename?: 'Subscriber', email: string } | null };
+export type PublishSubscriberMutation = { __typename?: 'Mutation', publishSubscriber?: { __typename?: 'Subscriber', id: string } | null };
+
+export type GetEmailSubscriberQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type GetEmailSubscriberQuery = { __typename?: 'Query', subscriber?: { __typename?: 'Subscriber', id: string } | null };
 
 export type GetLessonBySlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']>;
@@ -5597,8 +5649,8 @@ export type GetLessonsQuery = { __typename?: 'Query', lessons: Array<{ __typenam
 
 
 export const CreateSubscriberDocument = gql`
-    mutation CreateSubscriber($name: String!, $email: String!) {
-  createSubscriber(data: {name: $name, email: $email}) {
+    mutation CreateSubscriber($name: String!, $email: String!, $password: String!) {
+  createSubscriber(data: {name: $name, email: $email, password: $password}) {
     id
   }
 }
@@ -5620,6 +5672,7 @@ export type CreateSubscriberMutationFn = Apollo.MutationFunction<CreateSubscribe
  *   variables: {
  *      name: // value for 'name'
  *      email: // value for 'email'
+ *      password: // value for 'password'
  *   },
  * });
  */
@@ -5633,7 +5686,7 @@ export type CreateSubscriberMutationOptions = Apollo.BaseMutationOptions<CreateS
 export const PublishSubscriberDocument = gql`
     mutation PublishSubscriber($email: String!) {
   publishSubscriber(where: {email: $email}, to: PUBLISHED) {
-    email
+    id
   }
 }
     `;
@@ -5663,6 +5716,41 @@ export function usePublishSubscriberMutation(baseOptions?: Apollo.MutationHookOp
 export type PublishSubscriberMutationHookResult = ReturnType<typeof usePublishSubscriberMutation>;
 export type PublishSubscriberMutationResult = Apollo.MutationResult<PublishSubscriberMutation>;
 export type PublishSubscriberMutationOptions = Apollo.BaseMutationOptions<PublishSubscriberMutation, PublishSubscriberMutationVariables>;
+export const GetEmailSubscriberDocument = gql`
+    query GetEmailSubscriber($email: String!) {
+  subscriber(where: {email: $email}) {
+    id
+  }
+}
+    `;
+
+/**
+ * __useGetEmailSubscriberQuery__
+ *
+ * To run a query within a React component, call `useGetEmailSubscriberQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetEmailSubscriberQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetEmailSubscriberQuery({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useGetEmailSubscriberQuery(baseOptions: Apollo.QueryHookOptions<GetEmailSubscriberQuery, GetEmailSubscriberQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetEmailSubscriberQuery, GetEmailSubscriberQueryVariables>(GetEmailSubscriberDocument, options);
+      }
+export function useGetEmailSubscriberLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetEmailSubscriberQuery, GetEmailSubscriberQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetEmailSubscriberQuery, GetEmailSubscriberQueryVariables>(GetEmailSubscriberDocument, options);
+        }
+export type GetEmailSubscriberQueryHookResult = ReturnType<typeof useGetEmailSubscriberQuery>;
+export type GetEmailSubscriberLazyQueryHookResult = ReturnType<typeof useGetEmailSubscriberLazyQuery>;
+export type GetEmailSubscriberQueryResult = Apollo.QueryResult<GetEmailSubscriberQuery, GetEmailSubscriberQueryVariables>;
 export const GetLessonBySlugDocument = gql`
     query GetLessonBySlug($slug: String) {
   lesson(where: {slug: $slug}) {

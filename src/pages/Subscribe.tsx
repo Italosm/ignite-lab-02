@@ -1,9 +1,10 @@
-import { gql, useMutation } from "@apollo/client";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LogoIcon } from "../components/Logo";
+import Validator from "validatorjs";
 import {
   useCreateSubscriberMutation,
+  useGetEmailSubscriberQuery,
   usePublishSubscriberMutation,
 } from "../graphql/generated";
 
@@ -21,10 +22,44 @@ export function Subscribe() {
   async function handleSubscriber(event: FormEvent) {
     event.preventDefault();
 
+    // const data = {
+    //   name,
+    //   email,
+    //   password,
+    //   password_confirmation: passwordMatch,
+    // };
+
+    // const rules = {
+    //   name: ["required", "string", "between:3,50"],
+    //   email: ["required", "string", "email"],
+    //   password: ["required", "string", "between:6,50", "confirmed"],
+    //   password_confirmation: "required",
+    // };
+
+    // const validation = new Validator(data, rules, {
+    //   required: "Você esqueceu de preencher o campo :attribute",
+    //   between: "O :attribute precisa ter entre :min e :max caracteres",
+    //   confirmed: "As senhas não podem ser diferentes",
+    // });
+
+    // const id = useGetEmailSubscriberQuery({
+    //   variables: {
+    //     email,
+    //   },
+    // });
+    // if (validation.fails()) {
+    //   return [
+    //     validation.errors.first("name"),
+    //     validation.errors.first("email"),
+    //     validation.errors.first("password"),
+    //   ];
+    // }
+    // if (!!id) return console.log("Email já existe.");
     await createSubscriber({
       variables: {
         name,
         email,
+        password,
       },
     });
 
@@ -55,6 +90,7 @@ export function Subscribe() {
             oportunidades do mercado.
           </p>
         </div>
+
         {isLogin ? (
           <div className="w-full md:w-[360px] text-center p-6 mt-8  md:mt-0 bg-gray-700 border border-gray-500 rounded">
             <strong className="text-2xl mb-6 block">
