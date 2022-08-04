@@ -1,75 +1,59 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Formik, Field, Form, ErrorMessage } from 'formik'
 import { LogoIcon } from "../components/Logo";
-import Validator from "validatorjs";
+
 import {
   useCreateSubscriberMutation,
   useGetEmailSubscriberQuery,
   usePublishSubscriberMutation,
 } from "../graphql/generated";
+import schema from '../schema';
+
+
+interface FormValues {
+  name: string,
+  email: string,
+  password: string,
+  passwordMatch: string
+}
+
+const initialValues = {
+  name: '',
+  email: '',
+  password: '',
+  passwordMatch: ''
+}
+
 
 export function Subscribe() {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordMatch, setPasswordMatch] = useState("");
   const [isLogin, setIsLogin] = useState(true);
-
   const [createSubscriber, { loading }] = useCreateSubscriberMutation();
   const [publishSubscriber] = usePublishSubscriberMutation();
+ 
+  async function handleSubscriberLogin({email, password}:FormValues) {
+    return
+  }
+  async function handleSubscriber({name, email, password}:FormValues) {
+  
+      await createSubscriber({
+        variables: {
+          name,
+          email,
+          password,
+        },
+      });
+      await publishSubscriber({
+        variables: {
+          email,
+        },
+      });
 
-  async function handleSubscriber(event: FormEvent) {
-    event.preventDefault();
+      navigate("/event");
+   
 
-    // const data = {
-    //   name,
-    //   email,
-    //   password,
-    //   password_confirmation: passwordMatch,
-    // };
-
-    // const rules = {
-    //   name: ["required", "string", "between:3,50"],
-    //   email: ["required", "string", "email"],
-    //   password: ["required", "string", "between:6,50", "confirmed"],
-    //   password_confirmation: "required",
-    // };
-
-    // const validation = new Validator(data, rules, {
-    //   required: "Você esqueceu de preencher o campo :attribute",
-    //   between: "O :attribute precisa ter entre :min e :max caracteres",
-    //   confirmed: "As senhas não podem ser diferentes",
-    // });
-
-    // const id = useGetEmailSubscriberQuery({
-    //   variables: {
-    //     email,
-    //   },
-    // });
-    // if (validation.fails()) {
-    //   return [
-    //     validation.errors.first("name"),
-    //     validation.errors.first("email"),
-    //     validation.errors.first("password"),
-    //   ];
-    // }
-    // if (!!id) return console.log("Email já existe.");
-    await createSubscriber({
-      variables: {
-        name,
-        email,
-        password,
-      },
-    });
-
-    await publishSubscriber({
-      variables: {
-        email,
-      },
-    });
-
-    navigate("/event");
+    
   }
 
   return (
@@ -96,34 +80,47 @@ export function Subscribe() {
             <strong className="text-2xl mb-6 block">
               Inscreva-se gratuitamente
             </strong>
-            <form
+            <Formik
+              validateOnChange={false}
+              validationSchema={schema}
               onSubmit={handleSubscriber}
+              initialValues={initialValues}
+              render={() => (
+                <Form
               className="flex flex-col gap-2 w-full"
             >
-              <input
-                onChange={(event) => setName(event.target.value)}
+              <Field
+                id="name"
+                name="name"
                 className="bg-gray-900 rounded px-5 h-14"
                 type="text"
                 placeholder="Seu nome completo"
               />
-              <input
-                onChange={(event) => setEmail(event.target.value)}
+              <span className='text-orange-500'><ErrorMessage name='name' /></span>
+              
+              <Field
+                id="email"
+                name="email"
                 className="bg-gray-900 rounded px-5 h-14"
                 type="text"
                 placeholder="Digite seu e-mail"
               />
-              <input
-                onChange={(event) => setPassword(event.target.value)}
+              <span className='text-orange-500'><ErrorMessage name='email' /></span>
+              <Field
+                id="password"
+                name="password"
                 className="bg-gray-900 rounded px-5 h-14"
                 type="password"
                 placeholder="Digite sua senha"
               />
-              <input
-                onChange={(event) => setPasswordMatch(event.target.value)}
+              <span className='text-orange-500'><ErrorMessage name='password' /></span>
+              <Field
+                name="passwordMatch"
                 className="bg-gray-900 rounded px-5 h-14"
                 type="password"
                 placeholder="Confirme sua senha"
               />
+              <span className='text-orange-500'><ErrorMessage name='passwordMatch' /></span>
 
               <button
                 type="submit"
@@ -140,25 +137,33 @@ export function Subscribe() {
               >
                 Faça já seu login
               </button>
-            </form>
+            </Form>
+
+              )}
+            />
+            
           </div>
         ) : (
           <div className="w-full md:w-[360px] p-6 mt-8  md:mt-0 bg-gray-700 border border-gray-500 rounded">
             <strong className="text-2xl mb-6 block text-center">
               Acessar plataforma
             </strong>
-            <form
-              onSubmit={handleSubscriber}
+            <Formik
+              onSubmit={handleSubscriberLogin}
+              initialValues={initialValues}
+              render={() => (
+                <Form
+              
               className="flex flex-col gap-2 w-full"
             >
-              <input
-                onChange={(event) => setEmail(event.target.value)}
+              <Field
+                name="email"
                 className="bg-gray-900 rounded px-5 h-14"
                 type="text"
                 placeholder="Digite seu e-mail"
               />
-              <input
-                onChange={(event) => setPassword(event.target.value)}
+              <Field
+                name="password"
                 className="bg-gray-900 rounded px-5 h-14"
                 type="password"
                 placeholder="Digite sua senha"
@@ -179,13 +184,16 @@ export function Subscribe() {
               >
                 Inscreva-se já
               </button>
-              <a
+              {/* <a
                 href="#"
                 className="text-center border border-transparent rounded hover:border-white p-2 hover:bg-green-700"
               >
                 Esqueceu a senha?
-              </a>
-            </form>
+              </a> */}
+            </Form>
+              )}
+            />
+            
           </div>
         )}
       </div>
